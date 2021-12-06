@@ -1,10 +1,11 @@
 FROM debian:testing-slim
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-		ca-certificates \
-		postfix \
-		postfix-policyd-spf-python \
-	&& rm -rf /var/lib/apt/lists/*
+    ca-certificates \
+    postfix \
+    postfix-lmdb \
+    postfix-policyd-spf-python \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN sh /usr/lib/postfix/configure-instance.sh
 
