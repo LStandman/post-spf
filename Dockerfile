@@ -10,5 +10,6 @@ RUN sh /usr/lib/postfix/configure-instance.sh
 
 EXPOSE 25
 CMD ["sh", "-c",  \
-  "cp /etc/hosts /etc/resolv.conf /var/spool/postfix/etc/ \
+  "queue_dir=$(/usr/sbin/postconf -o inet_interfaces= -hx queue_directory) \
+  ;  cp /etc/hosts /etc/resolv.conf $queue_dir/etc/ \
   && /usr/sbin/postfix start-fg"]
